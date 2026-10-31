@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Food Image Analyzer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>Food Image Analyzer</h1>
+      <p>Upload a photo of a meal to get a nutritional breakdown and eating advice.</p>
+    </header>
+
+    <div id="error" class="banner" role="alert" hidden></div>
+
+    <section class="layout">
+      <div class="panel">
+        <div id="dropzone" class="dropzone" tabindex="0" role="button"
+             aria-label="Upload an image. Click or drop a file here.">
+          <input id="file-input" type="file" accept="image/jpeg,image/png" hidden>
+          <div id="drop-hint" class="drop-hint">
+            <strong>Drop an image here</strong>
+            <span>or click to browse</span>
+            <small>JPEG or PNG, up to 10 MB</small>
+          </div>
+          <img id="preview" class="preview" alt="Selected food image preview" hidden>
+        </div>
+
+        <p id="file-meta" class="file-meta" hidden></p>
+
+        <div class="actions">
+          <button id="analyze-btn" class="btn primary" disabled>Analyze</button>
+          <button id="reset-btn" class="btn" hidden>Analyze another</button>
+        </div>
+      </div>
+
+      <div class="panel result-panel" aria-live="polite">
+        <div id="result-empty" class="empty">Your analysis will appear here.</div>
+
+        <div id="result-loading" class="loading" hidden>
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Analyzing image. This can take several seconds.</p>
+          <div class="skeleton"></div>
+          <div class="skeleton short"></div>
+          <div class="skeleton"></div>
+        </div>
+
+        <article id="result" class="result" hidden></article>
+        <p id="result-note" class="note" hidden>
+          Values are AI estimates and not medical advice.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

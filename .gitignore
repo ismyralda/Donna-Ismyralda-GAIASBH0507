@@ -1,0 +1,14 @@
+.env
+node_modules/
+.vscode
+__pycache__/
+
+# My slides that I keep :P
+slides/
+
+# These are all the venvs for python lessons
+venv/
+genai/
+genai85/
+genai8/
+genai3/

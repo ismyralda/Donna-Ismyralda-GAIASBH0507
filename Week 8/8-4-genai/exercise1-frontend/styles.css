@@ -1,0 +1,170 @@
+:root {
+  --bg: #f6f7f4;
+  --surface: #ffffff;
+  --text: #1d2420;
+  --muted: #5f6b64;
+  --border: #dde2dc;
+  --accent: #2f7d4f;
+  --accent-text: #ffffff;
+  --danger-bg: #fdecea;
+  --danger-text: #8a1c14;
+  --radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131714;
+    --surface: #1b211d;
+    --text: #e8ede9;
+    --muted: #9aa69e;
+    --border: #2d362f;
+    --accent: #5fbf85;
+    --accent-text: #0c1a11;
+    --danger-bg: #3a1a17;
+    --danger-text: #f3b4ae;
+  }
+}
+
+* { box-sizing: border-box; }
+
+/* Make the hidden attribute win over display rules below. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+
+.app {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px 16px 56px;
+}
+
+.app-header h1 { margin: 0 0 4px; font-size: 1.7rem; }
+.app-header p { margin: 0 0 24px; color: var(--muted); }
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.dropzone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.15s, background 0.15s;
+}
+.dropzone:hover,
+.dropzone:focus-visible,
+.dropzone.dragover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  outline: none;
+}
+.dropzone.has-image { border-style: solid; cursor: default; }
+
+.drop-hint {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  padding: 16px;
+}
+.drop-hint span { color: var(--muted); }
+.drop-hint small { color: var(--muted); margin-top: 8px; }
+
+.preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.file-meta { margin: 10px 0 0; font-size: 0.85rem; color: var(--muted); word-break: break-all; }
+
+.actions { display: flex; gap: 10px; margin-top: 14px; }
+
+.btn {
+  font: inherit;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.btn:hover:not(:disabled) { border-color: var(--accent); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.banner {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.result-panel { min-height: 280px; }
+.empty { color: var(--muted); text-align: center; padding: 90px 0; }
+
+.loading { text-align: center; color: var(--muted); }
+.spinner {
+  width: 30px; height: 30px; margin: 8px auto 4px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.skeleton {
+  height: 14px; margin: 12px 0;
+  border-radius: 6px;
+  background: var(--border);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+.skeleton.short { width: 60%; }
+@keyframes pulse { 50% { opacity: 0.45; } }
+
+.result h1, .result h2, .result h3 { margin: 1.1em 0 0.4em; line-height: 1.25; }
+.result > :first-child { margin-top: 0; }
+.result ul, .result ol { padding-left: 1.3em; }
+.result table { border-collapse: collapse; width: 100%; margin: 0.8em 0; font-size: 0.95rem; }
+.result th, .result td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.result th { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+.note { margin: 16px 0 0; font-size: 0.8rem; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner, .skeleton { animation: none; }
+}

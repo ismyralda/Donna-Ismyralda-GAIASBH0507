@@ -1,0 +1,24 @@
+import os
+from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
+from pydantic import BaseModel, Field
+from typing import List
+
+load_dotenv()
+llm = ChatGoogleGenerativeAI(
+    model="gemini-3.1-flash-lite",
+    api_key=os.getenv("GEMINI_API_KEY")
+)
+
+class WeatherReport(BaseModel):
+    city: str = Field(description="Name of the city")
+    temperature: float = Field(description="Current temperature in Celsius")
+    conditions: List[str] = Field(description="List of weather conditions")
+    humidity: int = Field(description="Humidity percentage")
+    wind_speed: float = Field(description="Wind speend in km/h")
+
+output_parser = JsonOutputParser(pydantic_object=WeatherReport)
+
+chat_prompt = ChatPromptTemplate.from_messages

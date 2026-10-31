@@ -1,0 +1,315 @@
+/* ==========================================================
+   TABLE OF CONTENTS
+   1. Buttons        (.btn-chunky)
+   2. Cards          (.card-chunky)
+   3. Chips & tiles  (.chip-chunky, .tile-chunky)
+   4. Forms          (.input-chunky, .label-chunky, .error-chunky,
+                      .callout-chunky, .checkbox-chunky)
+   5. Game UI        (.segbar-chunky, .bubble-chunky, .nav-item-chunky)
+   6. Type           (.display-chunky, .text-chunky)
+   7. Motion         (.marquee-track, .blink, .floaty, carousel)
+
+   Naming rule: block name + "-chunky", colour/size variants use
+   "--variant" (eg. className="card-chunky card-chunky--mint").
+   Only colours and sizes from style-guide.css are used here.
+   NOTE: these classes are not inside a Tailwind @layer, so Tailwind
+   utilities (bg-*, p-*, text-*) will NOT override them. Use the
+   variants below instead.
+   ========================================================== */
+
+/* ===== 1. Buttons ===== */
+.btn-chunky {
+  --btn-bg: var(--mint);
+  --btn-fg: var(--charcoal);
+
+  /* layout so <Link> and <button> behave the same (anchors ignore transform when inline) */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  line-height: 1.1;
+  text-decoration: none;
+
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: var(--border-w) solid var(--black);
+  border-radius: var(--radius-md);
+  padding: 4px 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-chunky, 2px 2px 0 var(--black));
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+}
+
+.btn-chunky:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0 var(--black);
+}
+
+.btn-chunky:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0 0 0 var(--black);
+}
+
+/* Color variants for btn-chunky
+(eg. className="btn-chunky btn-chunky--yellow") */
+.btn-chunky--yellow { --btn-bg: var(--yellow); }
+.btn-chunky--mint { --btn-bg: var(--mint); }
+.btn-chunky--cream { --btn-bg: var(--bg); }
+.btn-chunky--lilac { --btn-bg: var(--lilac); }
+.btn-chunky--purple { --btn-bg: var(--purple); --btn-fg: #FFFFFF; }
+.btn-chunky--crimson { --btn-bg: var(--crimson); --btn-fg: #FFFFFF; }
+.btn-chunky--charcoal { --btn-bg: var(--charcoal); --btn-fg: var(--yellow); }
+.btn-chunky--mintdeep { --btn-bg: var(--mintdeep); --btn-fg: #FFFFFF; }
+.btn-chunky--infoblue { --btn-bg: var(--infoblue); --btn-fg: #FFFFFF; }
+
+/* Sizes: default is the small button above */
+.btn-chunky--lg { padding: 10px 22px; font-size: 1.125rem; }
+.btn-chunky--xl { padding: 12px 28px; font-size: 1.35rem; }
+.btn-chunky--block { display: flex; width: 100%; }
+.btn-chunky--start { justify-content: flex-start; }
+
+/* Ghost: outline only, fills with yellow on hover. Active nav links use aria-current. */
+.btn-chunky--ghost { --btn-bg: transparent; box-shadow: none; }
+.btn-chunky--ghost:hover { cursor: pointer; box-shadow: 0 0 0 var(--black);}
+.btn-chunky--ghost:active { box-shadow: none; }
+.btn-chunky--ghost[aria-current="page"] { --btn-bg: var(--charcoal); --btn-fg: var(--yellow); }
+
+/* ===== 2. Cards ===== */
+.card-chunky {
+  --card-bg: var(--yellow);
+  --card-fg: var(--charcoal);
+
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: var(--border-w) solid var(--black);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-chunky);
+}
+
+.card-chunky--mint { --card-bg: var(--mint); }
+.card-chunky--purple { --card-bg: var(--purple); --card-fg: #FFFFFF; }
+.card-chunky--lilac { --card-bg: var(--lilac); }
+.card-chunky--cream { --card-bg: var(--bg); }
+.card-chunky--charcoal { --card-bg: var(--charcoal); --card-fg: var(--yellow); }
+.card-chunky--crimson { --card-bg: var(--crimson); --card-fg: #FFFFFF; }
+.card-chunky--mintdeep { --card-bg: var(--mintdeep); --card-fg:  #FFFFFF;}
+
+/* Bigger radius + shadow for hero panels */
+.card-chunky--lg {
+  border-radius: var(--radius-lg);
+  box-shadow: calc(var(--shadow-offset) * 2) calc(var(--shadow-offset) * 2) 0 var(--black);
+}
+
+/* Lifts on hover, presses on click (for clickable cards) */
+.card-chunky--lift { transition: transform 0.1s ease, box-shadow 0.1s ease; }
+.card-chunky--lift:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: calc(var(--shadow-offset) + 4px) calc(var(--shadow-offset) + 4px) 0 var(--black);
+}
+.card-chunky--lift:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0 0 0 var(--black);
+}
+
+/* ===== 3. Chips & tiles ===== */
+.chip-chunky {
+  --chip-bg: var(--mint);
+  --chip-fg: var(--charcoal);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: var(--border-w) solid var(--black);
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+  padding: 2px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.chip-chunky--yellow { --chip-bg: var(--yellow); }
+.chip-chunky--cream { --chip-bg: var(--bg); }
+.chip-chunky--lilac { --chip-bg: var(--lilac); }
+.chip-chunky--purple { --chip-bg: var(--purple); --chip-fg: #FFFFFF; }
+.chip-chunky--charcoal { --chip-bg: var(--charcoal); --chip-fg: var(--yellow); }
+/* Bigger, sentence-case chip (eg. order summary labels) */
+.chip-chunky--lg { padding: 6px 12px; border-radius: var(--radius-md); font-size: 1rem; text-transform: none; letter-spacing: 0; }
+
+/* Small square badge (grades, icons). Set the size with Tailwind h-* w-*. */
+.tile-chunky {
+  --tile-bg: var(--mint);
+  --tile-fg: var(--charcoal);
+
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: var(--border-w) solid var(--black);
+  border-radius: calc(var(--radius-md) * 0.6);
+  background: var(--tile-bg);
+  color: var(--tile-fg);
+}
+.tile-chunky--yellow { --tile-bg: var(--yellow); }
+.tile-chunky--purple { --tile-bg: var(--purple); --tile-fg: var(--yellow); }
+.tile-chunky--charcoal { --tile-bg: var(--charcoal); --tile-fg: var(--yellow); }
+.tile-chunky--round { border-radius: 999px; }
+
+/* ===== 4. Forms ===== */
+.input-chunky {
+  --input-bg: var(--mint);
+
+  width: 100%;
+  background: var(--input-bg);
+  color: var(--charcoal);
+  border: var(--border-w) solid var(--black);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.input-chunky::placeholder { color: var(--charcoal); opacity: 0.55; }
+.input-chunky--yellow { --input-bg: var(--yellow); }
+
+.label-chunky {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.error-chunky {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding: 2px 8px;
+  border-radius: calc(var(--radius-md) / 2);
+  background: var(--charcoal);
+  color: var(--yellow);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* Full-width dark note (eg. "Demo only") */
+.callout-chunky {
+  padding: 0.5rem 0.75rem;
+  border-radius: calc(var(--radius-md) * 0.75);
+  background: var(--charcoal);
+  color: var(--yellow);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.checkbox-chunky {
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: var(--border-w) solid var(--black);
+  border-radius: calc(var(--radius-md) / 2);
+  background: var(--mint) center / 100% no-repeat;
+}
+.checkbox-chunky:checked {
+  background-color: var(--charcoal);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2361FBCA' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12l5 5L20 6'/%3E%3C/svg%3E");
+}
+
+/* ===== 5. Game UI ===== */
+/* Segmented XP / score bar. Fill colour: style="--seg-fill: var(--mint)" */
+.segbar-chunky { display: flex; gap: 4px; }
+.segbar-chunky__seg {
+  flex: 1;
+  height: 1rem;
+  border: calc(var(--border-w) - 1px) solid var(--black);
+  border-radius: 4px;
+  background: transparent;
+}
+.segbar-chunky__seg.is-filled { background: var(--seg-fill, var(--purple)); }
+
+/* Chat bubbles */
+.bubble-chunky {
+  align-self: flex-start;
+  max-width: 85%;
+  border: var(--border-w) solid var(--black);
+  border-radius: var(--radius-md);
+  background: var(--yellow);
+  color: var(--charcoal);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+}
+.bubble-chunky--you { align-self: flex-end; background: var(--charcoal); color: var(--yellow); }
+
+/* Sidebar / menu rows. Active state comes from NavLink's aria-current. */
+.nav-item-chunky {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: var(--border-w) solid transparent;
+  border-radius: var(--radius-md);
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.1s ease, border-color 0.1s ease;
+}
+.nav-item-chunky:hover { border-color: var(--black); background: var(--yellow); }
+.nav-item-chunky[aria-current="page"] {
+  border-color: var(--black);
+  background: var(--charcoal);
+  color: var(--yellow);
+}
+
+/* ===== 6. Type ===== */
+.display-chunky {
+  font-family: var(--font-body);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+/* Hard offset shadow behind big headings */
+.text-chunky { 
+  text-shadow: 0.05em 0.05em 0 var(--black); 
+  -webkit-text-stroke: 0.05em var(--black);
+  paint-order: stroke fill;
+}
+.text-chunky--lg { 
+  text-shadow: 0.06em 0.06em 0 var(--black); 
+  -webkit-text-stroke: 0.05em var(--black);
+  paint-order: stroke fill;
+}
+
+/* ===== 7. Motion ===== */
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes floaty { 50% { transform: translateY(-8px) rotate(var(--r, 6deg)); } }
+.marquee-track { animation: marquee 28s linear infinite; }
+.blink { animation: blink 1s steps(1) infinite; cursor: default;}
+.floaty { animation: floaty 3.2s ease-in-out infinite; }
+
+/* Reduced motion: global.css already stops animations; here the scroll-driven
+   landing carousel becomes a normal swipeable row. */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-outer { height: auto !important; }
+  .carousel-inner { position: static !important; height: auto !important; overflow: visible !important; padding-bottom: 4rem; }
+  .carousel-stage { min-height: 0 !important; }
+  .carousel-panel { display: none !important; }
+  .carousel-track { position: static !important; transform: none !important; overflow-x: auto; width: 100% !important; padding: 1rem 1.5rem 2rem; }
+}
+
+/* Hide the long hero description on short screens so the hero always fits */
+@media (max-height: 640px) { .hero-desc { display: none; } }
+
+.hero-dots {
+  background-color: var(--bg);
+  background-image: radial-gradient(#F0EDF9 2px, transparent 2px);
+  background-size: 15px 15px;
+}

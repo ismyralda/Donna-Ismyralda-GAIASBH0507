@@ -1,0 +1,25 @@
+:root {
+  /* Main Brand palette */
+  --purple: #7B5DD7;
+  --yellow: #FFEA4B;
+  --mint: #61FBCA;
+  --black: #000000;
+
+/* Additional Elements */
+  --coral: #FF6b57;
+  --crimson: #DC2F4F;
+  --mintdeep: #00A884;
+  --infoblue: #3E83EB;
+  --charcoal: #1E1E24;
+  --bg: #FFFDF5;
+  --lilac: #F0EDF9;
+
+  --font-body: 'Lexend Variable', 'Lexend', system-ui, sans-serif;
+
+  /* Chunky style */
+  --border-w: 3px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --shadow-offset: 4px;
+  --shadow-chunky: var(--shadow-offset) var(--shadow-offset) 0 var(--black);
+}

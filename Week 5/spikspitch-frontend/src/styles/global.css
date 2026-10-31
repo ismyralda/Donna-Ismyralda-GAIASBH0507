@@ -1,0 +1,22 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { min-height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  background-color: var(--bg);
+  background-image: radial-gradient(#F0EDF9 2px, transparent 2px);
+  background-size: 15px 15px;
+}
+
+/* Keyboard navigation is a Phase 1 requirement, so never remove focus outlines */
+:focus-visible {
+  outline: 4px solid var(--purple);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
