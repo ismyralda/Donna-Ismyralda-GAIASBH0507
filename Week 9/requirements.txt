@@ -9,3 +9,4 @@ python-dotenv
 fastapi[standard]
 uvicorn[standard]
 certifi; sys_platform == "darwin"
+"psycopg[binary]"
